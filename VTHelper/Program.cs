@@ -10,24 +10,35 @@ namespace VTHelper
     {
         static void Main(string[] args)
         {
-            if (args.Length == 0)
-            {
-                Console.WriteLine("Usage: -h <hash> -a <api-key>");
-            } else if (args[0] == "-h" || args[0] == "--help")
-            {
-                FlagPrint.PrintHelp();
+            switch (args.Length) {
+                case 0:
+                    Console.WriteLine("Usage: VTHelper.exe -s:hash -a:api-key");
+                    break;
+                case 1:
+                    if (args[0] == "--h" || args[0] == "--help")
+                    {
+                        FlagPrint.HelpScript();
 
-            } else if (args[0].Contains("-h") || args[1].Contains("-h"))
-            {
-                // TODO: handle Hash
-            } else if (args[0].Contains("-a") || args[1].Contains("-a"))
-            {
-                // TODO: handle api key
-            } else
-            {
-                Console.WriteLine("Welcome to VTHelper!");
-                Console.WriteLine();
-                WelcomePrint.WelcomeScript();
+                    } else
+                    {
+                        Console.WriteLine("Usage: VTHelper.exe -s:hash -a:api-key");
+                    }
+                    break;
+                case 2:
+                    if ((args[0] == "-s" || args[1] == "-s") && (args[0] == "-a" || args[1] == "-a"))
+                    {
+                        // TODO: handle Hash and API
+                        WelcomePrint.WelcomeScript();
+                        FileGetter.FileGet();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Usage: VTHelper.exe -s:hash -a:api-key");
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Input not understood. Use \"--h\" or \"--help\" for more info.");
+                    break;
             }
         }
     }

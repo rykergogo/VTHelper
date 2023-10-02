@@ -8,7 +8,7 @@ namespace VTHelper
 {
     internal class FlagPrint
     {
-        public static void PrintHelp()
+        public static void HelpScript()
         {
             Console.WriteLine("____   __________________ ___         .__                       ");
             Console.WriteLine("\\   \\ /   /\\__    ___/   |   \\   ____ |  | ______   ___________ ");
@@ -19,7 +19,9 @@ namespace VTHelper
             
             Console.WriteLine();
 
-            Console.WriteLine("Flags: \"-h\" OR \"--help\" to bring this page up.");
+            Console.WriteLine("Flags: \"--h\" OR \"--help\" to bring this page up.");
+            Console.WriteLine();
+            Console.WriteLine("Usage: VTHelper.exe -s:hash -a:api-key");
             Console.WriteLine();
             Console.WriteLine("VTHelper takes advantage of Virus Total's API to dump file info into an organized csv file.");
             Console.WriteLine();
