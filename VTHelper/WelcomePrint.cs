@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,9 @@ namespace VTHelper
             Console.WriteLine(" |  | \\/\\___  ||    <\\  ___/|  | \\/ /_/  >  <_> ) /_/  >  <_> )");
             Console.WriteLine(" |__|   / ____||__|_ \\\\___  >__|  \\___  / \\____/\\___  / \\____/ ");
             Console.WriteLine("        \\/          \\/    \\/     /_____/       /_____/         ");
+            Console.WriteLine();
+
+            Console.WriteLine("Welcome to VTHelper!\n");
         }
     }
 }
