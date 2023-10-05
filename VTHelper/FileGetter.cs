@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace VTHelper
 {
@@ -17,23 +18,34 @@ namespace VTHelper
         }
         public static async Task FileGetAsync(string hash, string api)
         {
-            var client = new HttpClient();
-            var request = new HttpRequestMessage
+            try
             {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri("https://www.virustotal.com/api/v3/files/" + hash),
-                Headers =
+                var client = new HttpClient();
+
+                Console.WriteLine("Getting File Info");
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri("https://www.virustotal.com/api/v3/files/" + hash),
+                    Headers =
                 {
                     { "accept", "application/json" },
                     { "x-apikey", api},
                 },
-            };
-            using (var response = await client.SendAsync(request))
+                };
+                using (var response = await client.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var body = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("File Info Retrieved");
+                    jsonSetter(body);
+                }
+            } catch (Exception ex)
             {
-                response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadAsStringAsync();
-                jsonSetter(body);
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(-1);
             }
+            
         }
     }
 }

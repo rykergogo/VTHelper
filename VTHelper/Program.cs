@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace VTHelper
 {
@@ -51,11 +52,22 @@ namespace VTHelper
                                 api = args[0].Substring(3);
                                 break;
                         }
-                        Console.WriteLine(hash);
-                        Console.WriteLine(api);
                         WelcomePrint.WelcomeScript();
                         await FileGetter.FileGetAsync(hash, api);
-                        File.WriteAllText("output.txt", FileGetter.bodyData);
+                        int res = ConversionHandler.FlipAndWrite(FileGetter.bodyData, hash);
+
+                        switch (res)
+                        {
+                            case 0:
+                                MessageBox.Show($"{api}.csv generated", "Done!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                break;
+                            case 1:
+                                Console.WriteLine($"Skipped: {hash}");
+                                break;
+                            case -1:
+                                Console.WriteLine("Error, Exiting...");
+                                break;
+                        }
                     }
                     else
                     {
